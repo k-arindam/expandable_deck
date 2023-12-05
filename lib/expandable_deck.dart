@@ -1,20 +1,12 @@
 library expandable_deck;
 
 import 'package:expandable_deck/src/data/constants.dart';
+import 'package:expandable_deck/src/enum/package_enums.dart';
 import 'package:expandable_deck/src/models/deck_item.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-enum CollapsedCardPosition {
-  front(0.0),
-  middle(0.1),
-  rear(0.2);
-
-  const CollapsedCardPosition(this._value);
-  final double _value;
-
-  double get position => _value;
-}
+export 'package:expandable_deck/src/models/deck_item.dart';
 
 class ExpandableDeck extends StatefulWidget {
   final List<DeckItem> items;
