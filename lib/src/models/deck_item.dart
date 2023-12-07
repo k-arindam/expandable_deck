@@ -14,7 +14,7 @@ class DeckItem {
     );
   }
 
-  Map toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'title': title,
       'time': time.toString(),

@@ -131,6 +131,20 @@ class _ExpandableDeckState extends State<ExpandableDeck>
     );
   }
 
+  void _onVerticalDragEnd(DragEndDetails details) {
+    final drag = details.primaryVelocity;
+
+    if (drag == null || _animationController.isAnimating) return;
+
+    if (drag > 0 && !_animationController.isCompleted) {
+      _animationController.forward();
+    }
+
+    if (drag < 0 && _animationController.isCompleted) {
+      _animationController.reverse();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -142,21 +156,7 @@ class _ExpandableDeckState extends State<ExpandableDeck>
           margin: const EdgeInsets.all(8.0),
           padding: const EdgeInsets.all(5.0),
           child: GestureDetector(
-            onVerticalDragEnd: (details) {
-              final drag = details.primaryVelocity;
-
-              if (drag == null || _animationController.isAnimating) return;
-
-              if (drag > 0 && !_animationController.isCompleted) {
-                debugPrint("Unfolding Stack !!!");
-                _animationController.forward();
-              }
-
-              if (drag < 0 && _animationController.isCompleted) {
-                debugPrint("Folding Stack !!!");
-                _animationController.reverse();
-              }
-            },
+            onVerticalDragEnd: _onVerticalDragEnd,
             child: Stack(
               alignment: Alignment.bottomCenter,
               clipBehavior: Clip.antiAlias,
